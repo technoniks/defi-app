@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import tether from '../assets/tether.png'
+import Airdrop from "./Airdrop";
 
 class Main extends Component {
 
     render() {
         return (
             <div id="content" className="mt-3">
-                <table className="table text-muted text-center">
+                <table className="table text-muted text-center" >
                     <thead>
                         <tr style={{color: 'white'}}>
                             <th scope="col">Staking Balance</th>
@@ -21,7 +22,13 @@ class Main extends Component {
                     </tbody>
                 </table>
                 <div className="card mb-2 p-3" style={{opacity: '.9'}}>
-                    <form className="mb-3" action="">
+                    <form onSubmit={(e) => {
+                        e.preventDefault()
+                        let amount
+                        amount = this.input.value.toString()
+                        amount = window.web3.utils.toWei(amount, 'ether')
+                        this.props.stakeTokens(amount)
+                    }} className="mb-3" action="">
                         <div style={{borderSpacing: '0 1em'}}>
                             <label style={{marginLeft: '15px'}} className="float-start">
                                 <b>Stake Tokens</b>
@@ -31,6 +38,7 @@ class Main extends Component {
                             </span>
                             <div className="input-group mb-4">
                                 <input 
+                                    ref={(input => {this.input = input})}
                                     className="bg-white text-black"
                                     type="text" 
                                     placeholder="0"
@@ -47,9 +55,12 @@ class Main extends Component {
                             </div>
                         </div>
                     </form>
-                    <button className="btn btn-primary btn-md btn-block">Withdraw</button>
+                    <button onClick={(e)=>{
+                        e.preventDefault()
+                        this.props.unStakeTokens()
+                    }} className="btn btn-primary btn-md btn-block">Withdraw</button>
                     <div className="card-body text-center text-blue">
-                        Airdrop
+                        Airdrop<Airdrop stakingBalance={this.props.stakingBalance}/>
                     </div>
                 </div>
             </div>

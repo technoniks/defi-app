@@ -1,4 +1,3 @@
-import { Component, useCallback } from "react";
 import Particles from 'react-tsparticles'
 import { loadFull } from "tsparticles";
 
@@ -23,15 +22,39 @@ function ParticleSettings() {
                             value: "#0d47a1"
                         }
                     },
+                    interactivity:{
+                        detect_on: 'canvas',
+                        events: {
+                            onClick: {
+                                enable: true,
+                                mode: 'push'
+                            }
+                        }
+                    },
                     particles: {
                         number: {
-                            value: 200,
+                            density: {
+                                enable: true,
+                                value_area: 800
+                            },
+                            value: 100,
                         },
                         size: {
+                            random: true,
                             value: 2
                         },
                         color: {
                           value: "#ffffff"
+                        },
+                        shape: {
+                          type: 'circle'  
+                        },
+                        links: {
+                            color: '#ffffff',
+                            distance: 150,
+                            enable: true,
+                            opacity: .5,
+                            width: 1
                         },
                         move: {
                             direction: "none",
@@ -40,9 +63,13 @@ function ParticleSettings() {
                                 default: "bounce",
                             },
                             random: false,
-                            speed: 3,
+                            speed:3,
                             straight: false,
                         },
+                        opacity: 0.5,
+                        collisions: {
+                            enable: true
+                        }
                     }
                 }} 
                 />

@@ -103,7 +103,7 @@ class App extends Component {
   render () {
     let content
     {
-      content = this.state.loading ? <p id='loader' className='text-center' style={{margin: '30px'}}>Loading ...</p> : 
+      content = this.state.loading ? <h2 id='loader' className='text-center' style={{margin: '30px', color: 'white'}}>Loading ...</h2> : 
       <Main 
         tetherBalance={this.state.tetherBalance}
         rwdBalance={this.state.rwdBalance}
